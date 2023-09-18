@@ -61,10 +61,15 @@
     }
   }
   const app = {
-    
     initMenu: function () {
-    const testProduct = new Product();
-    console.log("testProduct:", testProduct);
+      const testProduct = new Product();
+      console.log('testProduct:', testProduct);
+    },
+
+    initData: function () {
+      const thisApp = this;
+
+      thisApp.data = dataSource;
     },
 
     init: function () {
@@ -74,11 +79,10 @@
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
-     
+
       thisApp.initMenu();
     },
   };
 
-  
   app.init();
 }
