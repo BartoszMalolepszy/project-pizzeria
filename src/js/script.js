@@ -58,8 +58,25 @@
       const thisProduct = this;
       thisProduct.id = id; 
       thisProduct.data = data; 
+      thisProduct.renderInMenu ();
 
       console.log('new Product:', thisProduct);
+    }
+    renderInMenu (){
+      const thisProduct = this; 
+      /* generate HTML based on template */
+
+      const generateHTML = templates.menuProduct(thisProduct.data);
+      //console.log(generateHTML);
+
+      /*create element using utils.createElemenetFromHTML */
+      thisProduct.element = utils.createDOMFromHTML(generateHTML);
+
+      /* find menu container */
+
+      /* add element to menu */
+
+
     }
   }
   const app = {
