@@ -73,9 +73,10 @@
       thisProduct.element = utils.createDOMFromHTML(generateHTML);
 
       /* find menu container */
+      const menuContainer = document.querySelector(select.containerOf.menu);
 
       /* add element to menu */
-
+      menuContainer.appendChild(thisProduct.element);
 
     }
   }
