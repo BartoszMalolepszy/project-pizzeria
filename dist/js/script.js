@@ -53,7 +53,7 @@
       document.querySelector(select.templateOf.menuProduct).innerHTML
     ),
   };
-  //deklarujemy tutaj klasę czyli przepis na tworzenie instacji 
+  //deklarujemy tutaj klasę czyli przepis na tworzenie instacji
   class Product {
     constructor(id, data) {
       const thisProduct = this;
@@ -62,6 +62,8 @@
       thisProduct.renderInMenu();
       thisProduct.getElements(); // wywołania metod do późniejszego użytku
       thisProduct.initAccordion();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
 
       console.log('new Product:', thisProduct);
     }
@@ -81,17 +83,26 @@
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
-    getElements(){
+    getElements() {
       const thisProduct = this;
 
-      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable); // used in initAccordion
-      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
-      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
-      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(
+        select.menuProduct.clickable
+      ); // used in initAccordion
+      thisProduct.form = thisProduct.element.querySelector(
+        select.menuProduct.form
+      );
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(
+        select.all.formInputs
+      );
+      thisProduct.cartButton = thisProduct.element.querySelector(
+        select.menuProduct.cartButton
+      );
+      thisProduct.priceElem = thisProduct.element.querySelector(
+        select.menuProduct.priceElem
+      );
 
       console.log(this.getElements);
-
     }
 
     initAccordion() {
@@ -104,12 +115,14 @@
       );*/ //zmienna jest już nie potrzebna poniewąż pobierane jest z getElements (powyżej)
 
       /* START: add event listener to clickable trigger on event click */
-      thisProduct.accordionTrigger.addEventListener('click', function(event) {
+      thisProduct.accordionTrigger.addEventListener('click', function (event) {
         /* prevent default action for event */
         event.preventDefault();
 
         /* find active product (product that has active class) */
-        const activeProducts = document.querySelectorAll(classNames.menuProduct.wrapperActive);
+        const activeProducts = document.querySelectorAll(
+          classNames.menuProduct.wrapperActive
+        );
 
         console.log(activeProducts);
         /* if there is active product and it's not thisProduct.element, remove class active from it */
@@ -126,7 +139,37 @@
         thisProduct.element.classList.toggle('active');
       });
     }
+    initOrderForm(){
+
+      const thisProduct = this;
+      console.log('method initOrderForm: ', thisProduct);
+
+
+      thisProduct.form.addEventListener('submit', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+
+      for(let input of thisProduct.formInputs){
+        input.addEventListener('change', function(){
+          thisProduct.processOrder();
+        });
+      }
+
+      thisProduct.cartButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+
+    }
+
+    processOrder() {
+     const thisProduct = this;
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      //console.log('formData', formData);
+    }
   }
+
   const app = {
     initMenu: function () {
       const thisApp = this;
