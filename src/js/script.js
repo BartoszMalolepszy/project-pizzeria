@@ -56,14 +56,15 @@
   class Product {
     constructor(id, data) {
       const thisProduct = this;
-      thisProduct.id = id; 
-      thisProduct.data = data; 
-      thisProduct.renderInMenu ();
+      thisProduct.id = id;
+      thisProduct.data = data;
+      thisProduct.renderInMenu();
+      thisProduct.initAccordion();
 
       console.log('new Product:', thisProduct);
     }
-    renderInMenu (){
-      const thisProduct = this; 
+    renderInMenu() {
+      const thisProduct = this;
       /* generate HTML based on template */
 
       const generateHTML = templates.menuProduct(thisProduct.data);
@@ -77,7 +78,35 @@
 
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
+    }
+    initAccordion() {
+      const thisProduct = this;
 
+      /* find the clickable trigger (the element that should react to clicking) */
+      const clickableTrigger = thisProduct.element.querySelector(
+        select.menuProduct.clickable
+      );
+
+      /* START: add event listener to clickable trigger on event click */
+      clickableTrigger.addEventListener('click', function (event) {
+        /* prevent default action for event */
+        event.preventDefault();
+
+        /* find active product (product that has active class) */
+        const activeProducts = document.querySelectorAll(
+          select.all.menuProductsActive
+        );
+        console.log(activeProducts);
+        /* if there is active product and it's not thisProduct.element, remove class active from it */
+        for (let activeProduct of activeProducts) {
+          if (activeProduct !== thisProduct.element && activeProduct !==thisProduct.element) {
+            activeProduct.classList.remove('active');
+            console.log(activeProduct);
+          }
+        }
+        /* toggle active class on thisProduct.element */
+        thisProduct.element.classList.toggle('active');
+      });
     }
   }
   const app = {
