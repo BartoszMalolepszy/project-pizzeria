@@ -129,8 +129,7 @@
         /* if there is active product and it's not thisProduct.element, remove class active from it */
         for (let activeProduct of activeProducts) {
           if (
-            activeProduct !== thisProduct.element &&
-            activeProduct !== thisProduct.element
+            activeProduct !== thisProduct.element 
           ) {
             activeProduct.classList.remove('active');
             console.log(activeProduct);
