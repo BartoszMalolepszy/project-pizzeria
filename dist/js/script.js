@@ -120,8 +120,9 @@
         event.preventDefault();
 
         /* find active product (product that has active class) */
+
         const activeProducts = document.querySelectorAll(
-          classNames.menuProduct.wrapperActive
+          select.all.menuProductsActive
         );
 
         console.log(activeProducts);
