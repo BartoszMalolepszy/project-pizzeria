@@ -279,18 +279,25 @@
     setValue(value) {
       const thisWidget = this;
 
-      const newValue = parseInt(value); // parseInt pilnuje konwersj ze stringa '10' do postaci liczby 10 czyli intiger
+      let newValue = parseInt(value); // parseInt pilnuje konwersj ze stringa '10' do postaci liczby 10 czyli intiger
 
       /* Dodanie sprawdzania wartości na widget'cie */
 
       if (thisWidget.value !== newValue && !isNaN(newValue)) {
+        // Sprawdź, czy newValue nie jest mniejsze od minimalnej wartości
+        if (newValue < settings.amountWidget.defaultMin) {
+          newValue = settings.amountWidget.defaultMin;
+        }
+        // Sprawdź, czy newValue nie jest większe od maksymalnej wartości
+        if (newValue > settings.amountWidget.defaultMax) {
+          newValue = settings.amountWidget.defaultMax;
+        }
+      
         thisWidget.value = newValue;
-        console.log('thisWidget.value ', thisWidget.value);
+        thisWidget.input.value = thisWidget.value;
       }
-
-      thisWidget.input.value = thisWidget.value;
-      console.log('thisWidget.input.value ', thisWidget.input.value);
     }
+      
 
     initActions() {
       const thisWidget = this;
@@ -308,6 +315,15 @@
         event.preventDefault();
         thisWidget.setValue(thisWidget.value + 1);
       });
+    }
+
+    announce(){
+
+      const thisWidget = this;
+
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
+
     }
   }
 
