@@ -249,7 +249,7 @@
   class AmountWidget {
    
     constructor(element) {
-      
+      const thisWidget = this; 
       console.log ('AmountWidget:', thisWidget);
       console.log ('construktor arguments:', element);
     }
