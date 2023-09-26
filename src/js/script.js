@@ -151,6 +151,10 @@
         select.menuProduct.amountWidget
       );
 
+      this.dom.toggleTrigger = document.querySelector(
+        select.cart.toggleTrigger
+      );
+
       //console.log(this.getElements);
     }
 
@@ -407,7 +411,15 @@
       thisApp.initData();
       thisApp.initMenu();
     },
+
+    initCart: function () {
+      const thisApp = this;
+
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
+    },
   };
 
   app.init();
+  app.initCart();
 }
