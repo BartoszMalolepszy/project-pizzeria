@@ -202,6 +202,7 @@
       thisProduct.cartButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart()
       });
     }
 
@@ -268,6 +269,8 @@
       // multiply price by amount
       price *= thisProduct.amountWidget.value;
 
+      thisProduct.priceSingle = price; 
+      
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
@@ -277,7 +280,61 @@
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
     }
-  }
+
+    addToCart (){
+      const thisProduct = this;
+      
+      app.cart.add(thisProduct.prepareCartProduct());
+
+    }
+
+    prepareCartProduct(){
+
+    const thisProduct = this;
+    
+    const productSummary = {
+      id: thisProduct.id,
+      name: thisProduct.name,
+      amount: thisProduct.amountWidget.value,
+      priceSingle: thisProduct.priceSingle,
+      price: thisProduct.priceSingle * this.amountWidget.value,
+      //params: //thisProduct.prepareCartProductParams(),
+    };
+
+    return productSummary; 
+    
+    }
+
+    prepareCartProductParams () {
+      const thisProduct = this;
+
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      const params = {};
+
+      //for evry category (param)
+
+      for(let paramId in thisProduct.data.params){
+        const param = thisProduct.data.params[paramID];
+
+        //create category param in params const eg.  params = {ingredients: {name: 'Ingredients', options: {}}}
+        params[params] = { 
+          label: param.label,
+          options: {}
+        }
+
+        //for every option in this category 
+        for(let optionId in param.options) {
+          const option = param.options[optionId];
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+    
+          if(optionSelected) {
+            // option is selected!
+            params[paramId].options[optionId] = option.label;
+
+          }
+        }
+        return params;
+      }   
 
   // Module 9
 
@@ -371,6 +428,12 @@
       thisCart.initActions();
 
       console.log('new Cart:', thisCart);
+    }
+
+    add(menuProduct){
+      //const thisCard = this;
+
+      console.log('adding product:', menuProduct);
     }
 
     getElements(element) {
