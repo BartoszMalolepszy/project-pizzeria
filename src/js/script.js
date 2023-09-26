@@ -63,7 +63,10 @@
       thisProduct.getElements(); // wywołania metod do późniejszego użytku
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
+      thisProduct.initAmountWidget();
       thisProduct.processOrder();
+      thisWidget.getElements(element);
+      
 
       console.log('new Product:', thisProduct);
     }
@@ -83,6 +86,7 @@
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
+    
     getElements() {
       const thisProduct = this;
 
@@ -106,7 +110,17 @@
         select.menuProduct.imageWrapper
       );
 
-      console.log(this.getElements);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(
+        select.menuProduct.amountWidget
+      );
+
+      //console.log(this.getElements);
+    }
+    
+    initAmountWidget() {
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
     }
 
     initAccordion() {
@@ -129,11 +143,10 @@
           select.all.menuProductsActive
         );
 
-        console.log(activeProduct);
+        //console.log(activeProduct);
         /* if there is active product and it's not thisProduct.element, remove class active from it */
         if (activeProduct !== null && activeProduct !== thisProduct.element) {
           activeProduct.classList.remove('active');
-          console.log(activeProduct);
         }
 
         /* toggle active class on thisProduct.element */
@@ -169,7 +182,7 @@
 
       // set price to default price
       let price = thisProduct.data.price;
-      console.log(price);
+      //console.log(price);
 
       // for every category (param)
       for (let paramId in thisProduct.data.params) {
@@ -226,6 +239,27 @@
     }
   }
 
+  // Module 9
+
+  class AmountWidget {
+    constructor(element) {
+      const thisWidget = this;
+      getElements(element){
+        
+        const thisWidget = this;
+      
+        thisWidget.element = element;
+        thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+        thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+        thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+      }
+      
+
+      console.log('AmountWidget:', thisWidget);
+      console.log('construktor arguments:', element);
+    }
+  }
+
   const app = {
     initMenu: function () {
       const thisApp = this;
@@ -245,11 +279,11 @@
 
     init: function () {
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      //console.log('*** App starting ***');
+      //console.log('thisApp:', thisApp);
+      //console.log('classNames:', classNames);
+      //console.log('settings:', settings);
+      //console.log('templates:', templates);
       thisApp.initData();
       thisApp.initMenu();
     },
