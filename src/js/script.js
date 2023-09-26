@@ -65,7 +65,7 @@
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      thisWidget.getElements(element);
+      thisProduct.getElements(this.element);
       
 
       //console.log('new Product:', thisProduct);
@@ -228,6 +228,9 @@
           // Images end
         }
       }
+
+      // multiply price by amount
+      price *= thisProduct.amountWidget.value;
 
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
