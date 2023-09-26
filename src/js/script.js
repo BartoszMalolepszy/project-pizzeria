@@ -40,13 +40,13 @@
     },
   };
 
-  const settings = {
+  /*const settings = {
     amountWidget: {
       defaultValue: 1,
       defaultMin: 0,
       defaultMax: 10,
     },
-  };
+  };*/
 
   const templates = {
     menuProduct: Handlebars.compile(
@@ -249,8 +249,8 @@
   class AmountWidget {
    
     constructor(element) {
-      const thisWidget = this; 
-      thisWidget.getElements()
+      const thisWidget = this;
+      thisWidget.getElements(element); 
       
       console.log ('AmountWidget:', thisWidget);
       console.log ('construktor arguments:', element);
