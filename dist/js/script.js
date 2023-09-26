@@ -334,7 +334,8 @@
           }
         }
         return params;
-      }   
+      }
+    }
 
   // Module 9
 
