@@ -68,7 +68,7 @@
       thisWidget.getElements(element);
       
 
-      console.log('new Product:', thisProduct);
+      //console.log('new Product:', thisProduct);
     }
     renderInMenu() {
       const thisProduct = this;
@@ -117,12 +117,7 @@
       //console.log(this.getElements);
     }
     
-    initAmountWidget() {
-      const thisProduct = this;
-
-      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-    }
-
+    
     initAccordion() {
       const thisProduct = this;
       //console.log(thisProduct.element);
@@ -237,27 +232,77 @@
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
+
+    initAmountWidget() {
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
+
   }
 
   // Module 9
 
   class AmountWidget {
+   
     constructor(element) {
-      const thisWidget = this;
-      getElements(element){
-        
+      
+      console.log ('AmountWidget:', thisWidget);
+      console.log ('construktor arguments:', element);
+    }
+
+    getElements(element){
+
         const thisWidget = this;
       
         thisWidget.element = element;
+        console.log(thisWidget);
+
         thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
         thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
         thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
       }
-      
 
-      console.log('AmountWidget:', thisWidget);
-      console.log('construktor arguments:', element);
-    }
+      setValue(value){
+        const thisWidget = this;
+
+        const newValue = parseInt(value); // parseInt pilnuje konwersj ze stringa '10' do postaci liczby 10 czyli intiger
+
+        /* Dodanie sprawdzania wartości na widget'cie */
+
+        if(thisWidget.value !== newValue && !isNaN(newValue)) {
+          thisWidget.value = newValue;
+          console.log('thisWidget.value ', thisWidget.value);
+
+        }
+
+        thisWidget.input.value = thisWidget.value;
+        console.log('thisWidget.input.value ', thisWidget.input.value);
+
+      }
+
+      initActions(){
+
+        const thisWidget = this;
+
+        thisWidget.input.addEventListener('change', function(){
+        thisWidget.setValue(thisWidget.input.value);
+        });
+
+        thisWidget.linkDecrease.addEventListener('click', function(event){
+          event.preventDefault();
+          thisWidget.value--;
+          thisWidget.setValue(thisWidget.value);
+        });
+
+        thisWidget.linkIncrease.addEventListener('click', function(event){
+          event.preventDefault();
+          thisWidget.value++;
+          thisWidget.setValue(thisWidget.value);
+        });
+
+      }
+
   }
 
   const app = {
@@ -277,7 +322,7 @@
       thisApp.data = dataSource;
     },
 
-    init: function () {
+    init: function () { // następuje dostęp do danych z data source
       const thisApp = this;
       //console.log('*** App starting ***');
       //console.log('thisApp:', thisApp);
