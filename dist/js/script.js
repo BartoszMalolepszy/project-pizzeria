@@ -250,6 +250,8 @@
    
     constructor(element) {
       const thisWidget = this; 
+      thisWidget.getElements()
+      
       console.log ('AmountWidget:', thisWidget);
       console.log ('construktor arguments:', element);
     }
