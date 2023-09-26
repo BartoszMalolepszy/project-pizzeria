@@ -37,7 +37,8 @@
       productList: '.cart__order-summary',
       toggleTrigger: '.cart__summary',
       totalNumber: `.cart__total-number`,
-      totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
+      totalPrice:
+        '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
       subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
       deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
       form: '.cart__order',
@@ -53,7 +54,7 @@
     },
     // CODE ADDED END
   };
-  
+
   const classNames = {
     menuProduct: {
       wrapperActive: 'active',
@@ -65,12 +66,12 @@
     },
     // CODE ADDED END
   };
-  
+
   const settings = {
     amountWidget: {
       defaultValue: 1,
       defaultMin: 1,
-      defaultMax: 9,
+      defaultMax: 10,
     }, // CODE CHANGED
     // CODE ADDED START
     cart: {
@@ -78,15 +79,18 @@
     },
     // CODE ADDED END
   };
-  
+
   const templates = {
-    menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
+    menuProduct: Handlebars.compile(
+      document.querySelector(select.templateOf.menuProduct).innerHTML
+    ),
     // CODE ADDED START
-    cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
+    cartProduct: Handlebars.compile(
+      document.querySelector(select.templateOf.cartProduct).innerHTML
+    ),
     // CODE ADDED END
   };
 
-  
   //deklarujemy tutaj klasę czyli przepis na tworzenie instacji
   class Product {
     constructor(id, data) {
@@ -326,12 +330,11 @@
         if (newValue > settings.amountWidget.defaultMax) {
           newValue = settings.amountWidget.defaultMax;
         }
-      
+
         thisWidget.value = newValue;
         thisWidget.input.value = thisWidget.value;
       }
     }
-      
 
     initActions() {
       const thisWidget = this;
@@ -351,16 +354,31 @@
       });
     }
 
-    announce(){
-
+    announce() {
       const thisWidget = this;
 
       const event = new Event('updated');
       thisWidget.element.dispatchEvent(event);
-
     }
   }
+  class Cart {
+    constructor(element) {
+      const thisCart = this;
+      thisCart.products = [];
 
+      thisCart.getElements(element);
+
+      console.log('new Cart:', thisCart);
+    }
+
+    getElements(element) {
+      const thisCart = this;
+
+      thisCart.dom = {};
+
+      thisCart.dom.wrapper = element;
+    }
+  }
   const app = {
     initMenu: function () {
       const thisApp = this;
