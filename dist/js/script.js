@@ -40,13 +40,13 @@
     },
   };
 
-  /*const settings = {
+  const settings = {
     amountWidget: {
       defaultValue: 1,
       defaultMin: 0,
       defaultMax: 10,
     },
-  };*/
+  };
 
   const templates = {
     menuProduct: Handlebars.compile(
