@@ -392,9 +392,9 @@
         }
         
         thisWidget.input.value = thisWidget.value;
-      
+        thisWidget.announce()
+
       }
-     // thisWidget.announce()
   
 
     initActions(){
@@ -421,7 +421,9 @@
 
       const event = new Event('updated');
       thisWidget.element.dispatchEvent(event);
+
     }
+    
   }
   class Cart {
     constructor(element) {
