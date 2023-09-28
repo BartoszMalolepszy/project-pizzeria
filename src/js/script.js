@@ -202,7 +202,7 @@
       thisProduct.cartButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
-        thisProduct.addToCart()
+        thisProduct.addToCart();
       });
     }
 
@@ -269,8 +269,8 @@
       // multiply price by amount
       price *= thisProduct.amountWidget.value;
 
-      thisProduct.priceSingle = price; 
-      
+      thisProduct.priceSingle = price;
+
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
@@ -279,33 +279,34 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidgetElem.addEventListener('updated', function(){
+      thisProduct.processOrder();
+
+      })
     }
 
-    addToCart (){
+    addToCart() {
       const thisProduct = this;
-      
+
       app.cart.add(thisProduct.prepareCartProduct());
-
     }
 
-    prepareCartProduct(){
+    prepareCartProduct() {
+      const thisProduct = this;
 
-    const thisProduct = this;
-    
-    const productSummary = {
-      id: thisProduct.id,
-      name: thisProduct.name,
-      amount: thisProduct.amountWidget.value,
-      priceSingle: thisProduct.priceSingle,
-      price: thisProduct.priceSingle * this.amountWidget.value,
-      //params: //thisProduct.prepareCartProductParams(),
-    };
+      const productSummary = {
+        id: thisProduct.id,
+        name: thisProduct.name,
+        amount: thisProduct.amountWidget.value,
+        priceSingle: thisProduct.priceSingle,
+        price: thisProduct.priceSingle * this.amountWidget.value,
+        params: thisProduct.prepareCartProductParams(),
+      };
 
-    return productSummary; 
-    
+      return productSummary;
     }
 
-    prepareCartProductParams () {
+    prepareCartProductParams() {
       const thisProduct = this;
 
       const formData = utils.serializeFormToObject(thisProduct.form);
@@ -313,24 +314,25 @@
 
       //for evry category (param)
 
-      for(let paramId in thisProduct.data.params){
-        const param = thisProduct.data.params[paramID];
+      for (let paramId in thisProduct.data.params) {
+        const param = thisProduct.data.params[paramId];
 
         //create category param in params const eg.  params = {ingredients: {name: 'Ingredients', options: {}}}
-        params[params] = { 
+        params[params] = {
           label: param.label,
-          options: {}
-        }
+          options: {},
+        };
 
-        //for every option in this category 
-        for(let optionId in param.options) {
+        //for every option in this category
+        for (let optionId in param.options) {
           const option = param.options[optionId];
-          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
-    
-          if(optionSelected) {
+          const optionSelected =
+            formData[paramId] && formData[paramId].includes(optionId);
+
+          console.log(option);
+          if (optionSelected) {
             // option is selected!
             params[paramId].options[optionId] = option.label;
-
           }
         }
         return params;
@@ -354,6 +356,8 @@
       } else {
         thisWidget.setValue(settings.amountWidget.defaultValue);
       }
+      thisWidget.initActions();
+
     }
 
     getElements(element) {
@@ -376,6 +380,8 @@
     setValue(value) {
       const thisWidget = this;
 
+      console.log(thisWidget);
+
       let newValue = parseInt(value); // parseInt pilnuje konwersj ze stringa '10' do postaci liczby 10 czyli intiger
 
       /* Dodanie sprawdzania wartości na widget'cie */
@@ -393,24 +399,26 @@
         thisWidget.value = newValue;
         thisWidget.input.value = thisWidget.value;
       }
+      thisWidget.announce();
     }
 
-    initActions() {
+    initActions(){
       const thisWidget = this;
 
-      thisWidget.input.addEventListener('change', function () {
-        thisWidget.setValue(thisWidget.input.value);
+      thisWidget.input.addEventListener('change', function(){
+      thisWidget.setValue(thisWidget.input.value);
       });
 
-      thisWidget.linkDecrease.addEventListener('click', function (event) {
+      thisWidget.linkDecrease.addEventListener('click', function(event){
         event.preventDefault();
         thisWidget.setValue(thisWidget.value - 1);
       });
 
-      thisWidget.linkIncrease.addEventListener('click', function (event) {
+      thisWidget.linkIncrease.addEventListener('click', function(event){
         event.preventDefault();
         thisWidget.setValue(thisWidget.value + 1);
       });
+
     }
 
     announce() {
@@ -432,7 +440,7 @@
       console.log('new Cart:', thisCart);
     }
 
-    add(menuProduct){
+    add(menuProduct) {
       //const thisCard = this;
 
       console.log('adding product:', menuProduct);
