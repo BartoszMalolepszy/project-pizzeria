@@ -318,7 +318,7 @@
         const param = thisProduct.data.params[paramId];
 
         //create category param in params const eg.  params = {ingredients: {name: 'Ingredients', options: {}}}
-        params[params] = {
+        params[paramId] = {
           label: param.label,
           options: {},
         };
@@ -335,8 +335,9 @@
             params[paramId].options[optionId] = option.label;
           }
         }
-        return params;
+        
       }
+      return params;
     }
   }
 
