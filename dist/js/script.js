@@ -351,11 +351,14 @@
       console.log('AmountWidget:', thisWidget);
       console.log('construktor arguments:', element);
 
-      if (thisWidget.input.value) {
+      thisWidget.setValue(thisWidget.input.value ? thisWidget.input.value : settings.amountWidget.defaultValue);
+      
+      //Linia powyżej to jest to samo co kod poniżej: 
+      /*if (thisWidget.input.value) {
         thisWidget.setValue(thisWidget.input.value);
       } else {
         thisWidget.setValue(settings.amountWidget.defaultValue);
-      }
+      }*/
       thisWidget.initActions();
 
     }
