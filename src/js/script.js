@@ -350,7 +350,6 @@
 
       console.log('AmountWidget:', thisWidget);
       console.log('construktor arguments:', element);
-      thisWidget.initActions();
 
       if (thisWidget.input.value) {
         thisWidget.setValue(thisWidget.input.value);
@@ -387,21 +386,16 @@
 
       /* Dodanie sprawdzania wartości na widget'cie */
 
-      if (thisWidget.value !== newValue && !isNaN(newValue)) {
-        // Sprawdź, czy newValue nie jest mniejsze od minimalnej wartości
-        if (newValue < settings.amountWidget.defaultMin) {
-          newValue = settings.amountWidget.defaultMin;
-        }
-        // Sprawdź, czy newValue nie jest większe od maksymalnej wartości
-        if (newValue > settings.amountWidget.defaultMax) {
-          newValue = settings.amountWidget.defaultMax;
-        }
-
+      if (newValue <= settings.amountWidget.defaultMax && newValue >= settings.amountWidget.defaultMin && thisWidget.value !== newValue && !isNaN(newValue)) {
+        // Sprawdź, czy newValue nie jest mniejsze od minimalnej wartości, max wartości, jest liczbą etc. 
         thisWidget.value = newValue;
+        }
+        
         thisWidget.input.value = thisWidget.value;
+      
       }
-      thisWidget.announce();
-    }
+     // thisWidget.announce()
+  
 
     initActions(){
       const thisWidget = this;
