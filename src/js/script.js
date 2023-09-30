@@ -249,7 +249,7 @@
           const optionImage = thisProduct.imageWrapper.querySelector(
             '.' + paramId + '-' + optionId
           ); // '.' we are looking after class
-          console.log(optionImage);
+          //console.log(optionImage);
 
           // check if the option exists
           if (optionImage) {
@@ -288,7 +288,7 @@
     addToCart() {
       const thisProduct = this;
 
-      app.cart.add(thisProduct.prepareCartProduct());
+      app.cart.add(thisProduct.prepareCartProduct);
     }
 
     prepareCartProduct() {
@@ -337,6 +337,7 @@
         }
         
       }
+      console.log(params);
       return params;
     }
   }
