@@ -186,7 +186,7 @@
     }
     initOrderForm() {
       const thisProduct = this;
-      console.log('method initOrderForm: ', thisProduct);
+      //console.log('method initOrderForm: ', thisProduct);
 
       thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -244,7 +244,6 @@
               price -= option.price;
             }
           }
-
           // Images starting
           const optionImage = thisProduct.imageWrapper.querySelector(
             '.' + paramId + '-' + optionId
@@ -270,6 +269,7 @@
       price *= thisProduct.amountWidget.value;
 
       thisProduct.priceSingle = price;
+      console.log('added price single after check option:', thisProduct.priceSingle);
 
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
@@ -279,14 +279,14 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-      thisProduct.amountWidgetElem.addEventListener('updated', function(){
-      thisProduct.processOrder();
-
-      })
+      thisProduct.amountWidgetElem.addEventListener('updated', function () {
+        thisProduct.processOrder();
+      });
     }
 
     addToCart() {
       const thisProduct = this;
+      console.log(app.cart);
 
       app.cart.add(thisProduct.prepareCartProduct);
     }
@@ -303,11 +303,13 @@
         params: thisProduct.prepareCartProductParams(),
       };
 
+      console.log(productSummary);
       return productSummary;
     }
 
     prepareCartProductParams() {
       const thisProduct = this;
+      console.log(thisProduct);
 
       const formData = utils.serializeFormToObject(thisProduct.form);
       const params = {};
@@ -335,7 +337,6 @@
             params[paramId].options[optionId] = option.label;
           }
         }
-        
       }
       console.log(params);
       return params;
@@ -349,28 +350,29 @@
       const thisWidget = this;
       thisWidget.getElements(element);
 
-      console.log('AmountWidget:', thisWidget);
-      console.log('construktor arguments:', element);
+      // console.log('AmountWidget:', thisWidget);
+      // console.log('construktor arguments:', element);
 
-      thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue);
+      thisWidget.setValue(
+        thisWidget.input.value || settings.amountWidget.defaultValue
+      );
 
       //thisWidget.setValue(thisWidget.input.value ? thisWidget.input.value : settings.amountWidget.defaultValue);
-      
-      //Linia powyżej to jest to samo co kod poniżej: 
+
+      //Linia powyżej to jest to samo co kod poniżej:
       /*if (thisWidget.input.value) {
         thisWidget.setValue(thisWidget.input.value);
       } else {
         thisWidget.setValue(settings.amountWidget.defaultValue);
       }*/
       thisWidget.initActions();
-
     }
 
     getElements(element) {
       const thisWidget = this;
 
       thisWidget.element = element;
-      console.log(thisWidget);
+      //console.log(thisWidget);
 
       thisWidget.input = thisWidget.element.querySelector(
         select.widgets.amount.input
@@ -386,40 +388,42 @@
     setValue(value) {
       const thisWidget = this;
 
-      console.log(thisWidget);
+      //console.log(thisWidget);
 
       let newValue = parseInt(value); // parseInt pilnuje konwersj ze stringa '10' do postaci liczby 10 czyli intiger
 
       /* Dodanie sprawdzania wartości na widget'cie */
 
-      if (newValue <= settings.amountWidget.defaultMax && newValue >= settings.amountWidget.defaultMin && thisWidget.value !== newValue && !isNaN(newValue)) {
-        // Sprawdź, czy newValue nie jest mniejsze od minimalnej wartości, max wartości, jest liczbą etc. 
+      if (
+        newValue <= settings.amountWidget.defaultMax &&
+        newValue >= settings.amountWidget.defaultMin &&
+        thisWidget.value !== newValue &&
+        !isNaN(newValue)
+      ) {
+        // Sprawdź, czy newValue nie jest mniejsze od minimalnej wartości, max wartości, jest liczbą etc.
         thisWidget.value = newValue;
-        }
-        
-        thisWidget.input.value = thisWidget.value;
-        thisWidget.announce()
-
       }
-  
 
-    initActions(){
+      thisWidget.input.value = thisWidget.value;
+      thisWidget.announce();
+    }
+
+    initActions() {
       const thisWidget = this;
 
-      thisWidget.input.addEventListener('change', function(){
-      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.input.addEventListener('change', function () {
+        thisWidget.setValue(thisWidget.input.value);
       });
 
-      thisWidget.linkDecrease.addEventListener('click', function(event){
+      thisWidget.linkDecrease.addEventListener('click', function (event) {
         event.preventDefault();
         thisWidget.setValue(thisWidget.value - 1);
       });
 
-      thisWidget.linkIncrease.addEventListener('click', function(event){
+      thisWidget.linkIncrease.addEventListener('click', function (event) {
         event.preventDefault();
         thisWidget.setValue(thisWidget.value + 1);
       });
-
     }
 
     announce() {
@@ -427,9 +431,7 @@
 
       const event = new Event('updated');
       thisWidget.element.dispatchEvent(event);
-
     }
-    
   }
   class Cart {
     constructor(element) {
@@ -474,7 +476,7 @@
     initMenu: function () {
       const thisApp = this;
 
-      console.log('thisApp.data:', thisApp.data);
+      //console.log('thisApp.data:', thisApp.data);
 
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
@@ -488,12 +490,12 @@
     },
 
     init: function () {
-      // następuje dostęp do danych z data source
+      //następuje dostęp do danych z data source
       const thisApp = this;
-      //console.log('*** App starting ***');
-      //console.log('thisApp:', thisApp);
-      //console.log('classNames:', classNames);
-      //console.log('settings:', settings);
+      console.log('*** App starting ***');
+      console.log('thisApp:', thisApp);
+      console.log('classNames:', classNames);
+      console.log('settings:', settings);
       //console.log('templates:', templates);
       thisApp.initData();
       thisApp.initMenu();
