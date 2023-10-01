@@ -269,7 +269,10 @@
       price *= thisProduct.amountWidget.value;
 
       thisProduct.priceSingle = price;
-      console.log('added price single after check option:', thisProduct.priceSingle);
+      console.log(
+        'added price single after check option:',
+        thisProduct.priceSingle
+      );
 
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
@@ -286,9 +289,9 @@
 
     addToCart() {
       const thisProduct = this;
-      console.log(app.cart);
+      console.log(thisProduct);
 
-      app.cart.add(thisProduct.prepareCartProduct);
+      app.cart.add(thisProduct.prepareCartProduct());
     }
 
     prepareCartProduct() {
@@ -313,6 +316,8 @@
 
       const formData = utils.serializeFormToObject(thisProduct.form);
       const params = {};
+
+      console.log(params);
 
       //for evry category (param)
 
@@ -476,7 +481,7 @@
     initMenu: function () {
       const thisApp = this;
 
-      //console.log('thisApp.data:', thisApp.data);
+      console.log('thisApp.data:', thisApp.data);
 
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
