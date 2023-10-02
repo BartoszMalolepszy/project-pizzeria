@@ -151,6 +151,10 @@
         select.menuProduct.amountWidget
       );
 
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(
+        select.cart.productList
+      );
+
       //console.log(this.getElements);
     }
 
@@ -451,9 +455,12 @@
     }
 
     add(menuProduct) {
-      //const thisCard = this;
+      const thisCart = this;
 
       console.log('adding product:', menuProduct);
+      const generateHTML = templates.cartProduct(menuProduct);
+      const element = utils.createDOMFromHTML(generateHTML);
+      thisCart.dom.productList.appendChild(element);
     }
 
     getElements(element) {
