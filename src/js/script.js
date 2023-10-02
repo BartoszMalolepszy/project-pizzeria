@@ -266,13 +266,13 @@
       }
 
       // multiply price by amount
+      thisProduct.priceSingle = price;
       price *= thisProduct.amountWidget.value;
 
-      thisProduct.priceSingle = price;
-      console.log(
+      /*console.log(
         'added price single after check option:',
         thisProduct.priceSingle
-      );
+      );*/
 
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
@@ -299,7 +299,7 @@
 
       const productSummary = {
         id: thisProduct.id,
-        name: thisProduct.name,
+        name: thisProduct.data.name,
         amount: thisProduct.amountWidget.value,
         priceSingle: thisProduct.priceSingle,
         price: thisProduct.priceSingle * this.amountWidget.value,
@@ -336,7 +336,7 @@
           const optionSelected =
             formData[paramId] && formData[paramId].includes(optionId);
 
-          console.log(option);
+          //console.log(option);
           if (optionSelected) {
             // option is selected!
             params[paramId].options[optionId] = option.label;
@@ -481,7 +481,7 @@
     initMenu: function () {
       const thisApp = this;
 
-      console.log('thisApp.data:', thisApp.data);
+      //console.log('thisApp.data:', thisApp.data);
 
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
@@ -497,10 +497,10 @@
     init: function () {
       //następuje dostęp do danych z data source
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
+      //console.log('*** App starting ***');
+      //console.log('thisApp:', thisApp);
+      //console.log('classNames:', classNames);
+      //console.log('settings:', settings);
       //console.log('templates:', templates);
       thisApp.initData();
       thisApp.initMenu();
