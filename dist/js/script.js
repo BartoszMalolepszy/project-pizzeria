@@ -461,6 +461,8 @@
       const generateHTML = templates.cartProduct(menuProduct);
       const element = utils.createDOMFromHTML(generateHTML);
       thisCart.dom.productList.appendChild(element);
+      thisCart.products.push(menuProduct);
+      console.log ('thisCart.products:', thisCart.products);
     }
 
     getElements(element) {
@@ -485,6 +487,14 @@
 
         thisCart.dom.wrapper.classList.toggle('active');
       });
+    }
+  }
+
+  class cartProduct {
+    constructor(menuProduct, element) {
+      thisCartProduct = this; 
+
+      
     }
   }
   const app = {
