@@ -457,7 +457,7 @@
       const generateHTML = templates.cartProduct(menuProduct);
       const element = utils.createDOMFromHTML(generateHTML);
       thisCart.dom.productList.appendChild(element);
-      thisCart.products.push(menuProduct);
+      thisCart.products.push(new CartProduct(menuProduct, element));
       console.log('thisCart.products:', thisCart.products);
     }
 
