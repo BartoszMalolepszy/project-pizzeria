@@ -77,6 +77,11 @@
     cart: {
       defaultDeliveryFee: 20,
     },
+    db: {
+      url: '//localhost:3131',
+      products: 'products',
+      orders: 'orders',
+    },
     // CODE ADDED END
   };
 
@@ -434,9 +439,8 @@
     announce() {
       const thisWidget = this;
 
-      const event = new CustomEvent('updated',
-      {
-        bubbles: true
+      const event = new CustomEvent('updated', {
+        bubbles: true,
       });
 
       thisWidget.element.dispatchEvent(event);
@@ -496,11 +500,11 @@
 
         thisCart.dom.wrapper.classList.toggle('active');
       });
-      thisCart.dom.productList.addEventListener('updated', function(){
+      thisCart.dom.productList.addEventListener('updated', function () {
         thisCart.update();
       });
 
-      thisCart.dom.productList.addEventListener('remove', function(event){
+      thisCart.dom.productList.addEventListener('remove', function (event) {
         thisCart.remove(event.detail.cartProduct);
       });
     }
@@ -539,12 +543,11 @@
 
     remove(event) {
       const thisCart = this;
-      event.dom.wrapper.remove(event);
+      event.dom.wrapper.remove();
       const removeElement = thisCart.products.indexOf(event);
       thisCart.products.splice(removeElement, 1);
       thisCart.update();
     }
-
   }
 
   class CartProduct {
@@ -623,7 +626,7 @@
       });
     }
 
-    remove (){
+    remove() {
       const thisCartProduct = this;
 
       const event = new CustomEvent('remove', {
@@ -634,7 +637,6 @@
       });
       thisCartProduct.dom.wrapper.dispatchEvent(event);
     }
-
   }
   const app = {
     initMenu: function () {
@@ -650,7 +652,24 @@
     initData: function () {
       const thisApp = this;
 
-      thisApp.data = dataSource;
+      thisApp.data = {};
+      const url = settings.db.url + '/' + settings.db.products;
+
+      fetch(url)
+      .then(function(rawResponse){
+        return rawResponse.json();
+      })
+      .then(function(parsedResponse){
+        console.log('parsedResponse:', parsedResponse);
+
+        /* save parsedResponse as thisApp.data.products */
+
+        /*exrcute initMenu method */
+
+
+      })
+
+      console.log('thisApp.data', JSON.stringify(thisApp.data));
     },
 
     init: function () {
