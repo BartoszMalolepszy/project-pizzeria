@@ -529,9 +529,8 @@
         thisCart.dom.deliveryFee.innerHTML = deliveryFee;
       } else {
         thisCart.totalPrice = 0;
+        thisCart.dom.deliveryFee.innerHTML = 0;
       }
-      thisCart.amountWidget;
-      thisCart.totalPrice;
 
       thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
       thisCart.dom.totalNumber.innerHTML = totalNumber;
