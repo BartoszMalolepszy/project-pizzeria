@@ -361,7 +361,7 @@
       thisWidget.getElements(element);
 
       // console.log('AmountWidget:', thisWidget);
-      // console.log('construktor arguments:', element);
+       console.log('construktor arguments:', element);
 
       thisWidget.setValue(
         thisWidget.input.value || settings.amountWidget.defaultValue
@@ -398,7 +398,7 @@
     setValue(value) {
       const thisWidget = this;
 
-      //console.log(thisWidget);
+      console.log(thisWidget);
 
       let newValue = parseInt(value); // parseInt pilnuje konwersj ze stringa '10' do postaci liczby 10 czyli intiger
 
@@ -496,7 +496,7 @@
       thisCart.dom.form = element.querySelector(select.cart.form);
       thisCart.dom.address = element.querySelector(select.cart.address);
       
-      thisCart.dom.phone = element.querySelector(select.cart.phone); //linia 47
+      thisCart.dom.phone = element.querySelector(select.cart.phone);
 
     }
 
@@ -582,6 +582,26 @@
       }
       
       console.log(payload);
+
+      /*fetch(url, {
+        metod: 'POST', 
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });*/  //wyciągamy teraz opcje do osobnej stałej , dla ładniejszego kodu
+      //czyli to jest dokładnie to samo 
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+
+      fetch (url, options);
+
     }
   }
 
@@ -673,10 +693,24 @@
       thisCartProduct.dom.wrapper.dispatchEvent(event);
     }
 
-   // getData {
+   getData () {
 
+    const thisCartProduct = this;
+    
+    const cartProductSummary = {
+      id: thisCartProduct.id,
+      name: thisCartProduct.name,
+      amount: thisCartProduct.amount,
+      priceSingle: thisCartProduct.priceSingle,
+      price: thisCartProduct.price,
+      params: thisCartProduct.params,
+    };
+    
+    
+    return cartProductSummary;
 
     }
+  }
   
   const app = {
     initMenu: function () {
@@ -733,5 +767,5 @@
   };
 
   app.init();
-  app.initCart();
+  app.initCart()
 }
