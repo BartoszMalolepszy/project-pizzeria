@@ -527,6 +527,8 @@
       console.log(thisCart);
       let deliveryFee = settings.cart.defaultDeliveryFee;
       
+        
+
       thisCart.totalNumber = 0;
       thisCart.subtotalPrice = 0;
       
@@ -542,6 +544,8 @@
       if (thisCart.totalNumber == 0) {
       deliveryFee = 0;
       }
+
+      thisCart.deliveryFee = deliveryFee; 
 
       thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
       thisCart.dom.deliveryFee.innerHTML = deliveryFee;
@@ -574,7 +578,7 @@
         totalPrice: thisCart.totalPrice,
         subtotalPrice: thisCart.subtotalPrice,
         totalNumber: thisCart.totalNumber,
-        deliveryFee: settings.cart.defaultDeliveryFee,
+        deliveryFee: thisCart.deliveryFee,
         products: [] ,
       }
       
@@ -705,7 +709,7 @@
       name: thisCartProduct.name,
       amount: thisCartProduct.amount,
       priceSingle: thisCartProduct.priceSingle,
-      totalNumber: thisCartProduct.totalNumber,
+      //totalNumber: thisCartProduct.totalNumber,
 
       price: thisCartProduct.price,
       params: thisCartProduct.params,
