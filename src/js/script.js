@@ -485,6 +485,7 @@
       );
       // console.log(thisCart.dom.toggleTrigger);
       thisCart.dom.deliveryFee = element.querySelector(select.cart.deliveryFee);
+     
       thisCart.dom.subtotalPrice = element.querySelector(
         select.cart.subtotalPrice
       );
@@ -571,8 +572,8 @@
         address: thisCart.dom.address.value,
         phone: thisCart.dom.phone.value,
         totalPrice: thisCart.totalPrice,
-        subtotalPrice: thisCart.subtotalPrice,
-        totalNumber: thisCart.totalNumber,
+        subtotalPrice: thisCart.dom.subtotalPrice.innerHTML,
+        totalNumber: thisCart.dom.totalNumber.innerHTML,
         deliveryFee: settings.cart.defaultDeliveryFee,
         products: [] ,
       }
@@ -696,12 +697,16 @@
    getData () {
 
     const thisCartProduct = this;
+
+    console.log(thisCartProduct);
     
     const cartProductSummary = {
       id: thisCartProduct.id,
       name: thisCartProduct.name,
       amount: thisCartProduct.amount,
       priceSingle: thisCartProduct.priceSingle,
+      totalNumber: thisCartProduct.totalNumber,
+
       price: thisCartProduct.price,
       params: thisCartProduct.params,
     };
