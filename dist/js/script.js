@@ -492,7 +492,7 @@
       thisCart.dom.totalPrice = element.querySelectorAll(
         select.cart.totalPrice
       );
-      thisCart.dom.totalNumber = element.querySelector(select.cart.totalNumber);
+      thisCart.dom.totalNumber = element.querySelectorAll(select.cart.totalNumber);
       
       thisCart.dom.form = element.querySelector(select.cart.form);
       thisCart.dom.address = element.querySelector(select.cart.address);
@@ -527,27 +527,27 @@
       console.log(thisCart);
       let deliveryFee = settings.cart.defaultDeliveryFee;
       
-      let totalNumber = 0;
-      let subtotalPrice = 0;
+      thisCart.totalNumber = 0;
+      thisCart.subtotalPrice = 0;
       
      
       for (const product of thisCart.products) {
-        totalNumber += product.amount;
-        subtotalPrice += product.price;
+        thisCart.totalNumber += product.amount;
+        thisCart.subtotalPrice += product.price;
       }
 
       console.log(thisCart.dom.deliveryFee);
 
       
-      if (totalNumber == 0) {
+      if (thisCart.totalNumber == 0) {
       deliveryFee = 0;
       }
 
-      thisCart.totalPrice = subtotalPrice + deliveryFee;
+      thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
       thisCart.dom.deliveryFee.innerHTML = deliveryFee;
 
-      thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
-      thisCart.dom.totalNumber.innerHTML = totalNumber;
+      thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
+      thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
 
       thisCart.dom.totalPrice.forEach(function (element) {
         element.innerHTML = thisCart.totalPrice;
@@ -572,8 +572,8 @@
         address: thisCart.dom.address.value,
         phone: thisCart.dom.phone.value,
         totalPrice: thisCart.totalPrice,
-        subtotalPrice: thisCart.dom.subtotalPrice.innerHTML,
-        totalNumber: thisCart.dom.totalNumber.innerHTML,
+        subtotalPrice: thisCart.subtotalPrice,
+        totalNumber: thisCart.totalNumber,
         deliveryFee: settings.cart.defaultDeliveryFee,
         products: [] ,
       }
