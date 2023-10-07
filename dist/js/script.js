@@ -525,7 +525,7 @@
     update() {
       const thisCart = this;
       console.log(thisCart);
-      let deliveryFee = settings.cart.defaultDeliveryFee;
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
       
         
 
@@ -542,13 +542,13 @@
 
       
       if (thisCart.totalNumber == 0) {
-      deliveryFee = 0;
+      thisCart.deliveryFee = 0;
       }
 
-      thisCart.deliveryFee = deliveryFee; 
+      //thisCart.deliveryFee; 
 
-      thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
-      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
+      thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
 
       thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
       thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
