@@ -551,7 +551,10 @@
       thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
 
       thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
-      thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
+      thisCart.dom.totalNumber.forEach(function (element) {
+        element.innerHTML = thisCart.totalNumber;
+      });
+      console.log(thisCart.totalNumber);
 
       thisCart.dom.totalPrice.forEach(function (element) {
         element.innerHTML = thisCart.totalPrice;
