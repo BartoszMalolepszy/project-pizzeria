@@ -492,7 +492,7 @@
       thisCart.dom.totalPrice = element.querySelectorAll(
         select.cart.totalPrice
       );
-      thisCart.dom.totalNumber = element.querySelectorAll(select.cart.totalNumber);
+      thisCart.dom.totalNumber = element.querySelector(select.cart.totalNumber);
       
       thisCart.dom.form = element.querySelector(select.cart.form);
       thisCart.dom.address = element.querySelector(select.cart.address);
@@ -551,14 +551,12 @@
       thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
 
       thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
-      thisCart.dom.totalNumber.forEach(function (element) {
-        element.innerHTML = thisCart.totalNumber;
-      });
-      console.log(thisCart.totalNumber);
-
+      console.log(thisCart.dom.totalNumber);
+      
       thisCart.dom.totalPrice.forEach(function (element) {
         element.innerHTML = thisCart.totalPrice;
       });
+      thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
     }
 
     remove(product) {
