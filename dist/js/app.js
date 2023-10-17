@@ -65,5 +65,6 @@ const app = {
 };
 
 app.init();
+app.initCart()
 
 export default app;

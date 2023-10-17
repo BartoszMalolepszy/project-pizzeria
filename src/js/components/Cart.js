@@ -168,6 +168,5 @@ class Cart {
 
     }
   }
-  //app.initCart()
 
   export default Cart; 
