@@ -1,7 +1,7 @@
-import { settings, select, templates } from './settings';
-import utils from './utils.js';
-import CartProduct from './CartProduct';
-import app from '../app';
+import { settings, select, templates } from '../settings.js';
+import utils from '../utils.js';
+import CartProduct from './CartProduct.js';
+import app from '../app.js';
 
 
 class Cart {
@@ -168,6 +168,6 @@ class Cart {
 
     }
   }
-  app.initCart()
+  //app.initCart()
 
   export default Cart; 
