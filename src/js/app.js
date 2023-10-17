@@ -1,6 +1,6 @@
-import { settings, select } from './settings';
-import Product from './components/Product';
-import Cart from './components/Cart';
+import { settings, select } from './settings.js';
+import Product from './components/Product.js';
+import Cart from './components/Cart.js';
 
 const app = {
   initMenu: function () {
@@ -58,7 +58,7 @@ const app = {
 
     thisApp.productList = document.querySelector(select.containerOf.menu);
 
-    thisApp.productList.addEventListener ('add-to-cart', function (event) {
+    thisApp.productList.addEventListener('add-to-cart', function (event) {
       app.cart.add(event.detail.product);
     });
   },
@@ -66,4 +66,4 @@ const app = {
 
 app.init();
 
-export default app; 
+export default app;
