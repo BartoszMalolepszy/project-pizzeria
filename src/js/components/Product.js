@@ -14,7 +14,7 @@ class Product {
     thisProduct.initOrderForm();
     thisProduct.initAmountWidget();
     thisProduct.processOrder();
-    thisProduct.getElements(this.element);
+   // thisProduct.getElements(this.element);
 
     //console.log('new Product:', thisProduct);
   }
@@ -23,10 +23,11 @@ class Product {
     /* generate HTML based on template */
 
     const generateHTML = templates.menuProduct(thisProduct.data);
-    //console.log(generateHTML);
+   //console.log(generateHTML);
 
     /*create element using utils.createElemenetFromHTML */
     thisProduct.element = utils.createDOMFromHTML(generateHTML);
+    console.log(thisProduct.element);
 
     /* find menu container */
     const menuContainer = document.querySelector(select.containerOf.menu);
@@ -62,7 +63,6 @@ class Product {
       select.menuProduct.amountWidget
     );
 
-    //console.log(this.getElements);
   }
 
   initAccordion() {
