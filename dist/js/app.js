@@ -47,7 +47,9 @@ const app = {
     //console.log('classNames:', classNames);
     //console.log('settings:', settings);
     //console.log('templates:', templates);
-    thisApp.initData();
+    thisApp.initData();   
+    app.initCart()
+
   },
 
   initCart: function () {
@@ -65,6 +67,6 @@ const app = {
 };
 
 app.init();
-app.initCart()
+
 
 export default app;
