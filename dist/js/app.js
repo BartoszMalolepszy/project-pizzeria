@@ -48,7 +48,7 @@ const app = {
     //console.log('settings:', settings);
     //console.log('templates:', templates);
     thisApp.initData();   
-    app.initCart()
+    thisApp.initCart()
 
   },
 
